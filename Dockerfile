@@ -10,4 +10,4 @@ COPY keras.json /root/.keras/
 
 RUN ["python", "/vgg_16/model_test.py"]
 
-CMD ["python", "/vgg_16/model_test.py"]
+CMD ["python", "/vgg_16/extractor.py", "--help"]
