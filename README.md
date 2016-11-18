@@ -1,9 +1,12 @@
 # VGG 16 inside Docker
 Easily extract image features from various layers of VGG16 with this Docker image.
 Or just use it in prediction mode to get labels for input images.
+
 The Docker image contains a pre-trained VGG16 model along with scripts to load images from a directory and to extract features from them.
-Just run `docker run -it --rm -v $DATA_DIR:/data -v $OUTPUT_DIR:/output vgg_docker:latest python /vgg_16/extractor.py` to extract features from all images in `$DATA_DIR`.
+
+Run `docker run -it --rm -v $DATA_DIR:/data -v $OUTPUT_DIR:/output dominicbreuker/vgg_docker:latest python /vgg_16/extractor.py` to extract features from all images in `$DATA_DIR`.
 Resuts will be written to `$OUTPUT_DIR`.
+
 You can pass various arguments to `extractor.py`:
 - `--mode` (`-m`) defines the kind of feature you want to generate. 4 modes are available:
   - `label`: returns the prediction in plain english (e.g, 'ipod'). You can see a list of labels in `/vgg_16/synset_words.txt`.
@@ -14,7 +17,7 @@ You can pass various arguments to `extractor.py`:
 - `--extension` (`-e`) defines the files you can look for in `$DATA_DIR`. Defaults to `jpg`. The script will process all images with the given extension anywhere in the file tree below `$DATA_DIR`.
 
 Defaults for each mode are as follows:
-`docker run -it --rm -v $DATA_DIR:/data -v $OUTPUT_DIR:/output vgg_docker:latest python /vgg_16/extractor.py -m label -hs 256 -ws 256 -e jpg`
+`docker run -it --rm -v $DATA_DIR:/data -v $OUTPUT_DIR:/output dominicbreuker/vgg_docker:latest python /vgg_16/extractor.py -m label -hs 256 -ws 256 -e jpg`
 
 After running this script, you will find the following two files in `$OUTPUT_DIR`:
 - `image_files_vgg16_label_256x256_<timestamp>.npz` with a list of image file names (your IDs)
