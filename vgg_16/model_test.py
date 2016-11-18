@@ -1,7 +1,7 @@
 import numpy as np
 import os
 from keras.optimizers import SGD
-from model import vgg_16, load_image_vgg_16
+from model import vgg_16, load_image_vgg_16, get_label_by_index
 from functools32 import lru_cache
 
 SUCCESS_STRING = 'Asserted {} is a {} --> True'
@@ -52,20 +52,6 @@ def load_test_image_paths():
         if filename.endswith(".jpg"):
             image_paths.append(os.path.join(test_image_directory(), filename))
     return image_paths
-
-
-@lru_cache(maxsize=1)
-def load_class_labels():
-    labels_path = os.path.join(current_directory(), "synset_words.txt")
-    class_labels = []
-    with open(labels_path, "r") as lines:
-        for line in lines:
-            class_labels.append(line.rstrip("\n").split(" ", 1)[1])
-    return class_labels
-
-
-def get_label_by_index(index):
-    return load_class_labels()[index]
 
 
 def current_directory():

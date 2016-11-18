@@ -1,4 +1,6 @@
-weights
+weights/vgg16_weights_tensorflow.h5
+data
+output
 
 ############# PYTHON ###########
 
