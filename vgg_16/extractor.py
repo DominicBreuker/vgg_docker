@@ -67,7 +67,6 @@ if __name__ == "__main__":
 
     input_size = (args.height, args.width)
     image_files = get_image_files(data_directory(), args.extension)
-    print(image_files)
     if args.mode == 'label':
         model = vgg_16(include_layers="softmax", input_size=input_size)
         extractor = extract_max
@@ -85,8 +84,16 @@ if __name__ == "__main__":
 
     # extract data
     extractions = []
+    total_images = len(image_files)
+    progress = 0
     for image_file in image_files:
         extractions.append(extractor(model, image_file, input_size))
+        progress += 1
+        print("{} - Progress: {}/{} ({:3.5f}%) - Image '{}' done ..."
+            .format(datetime.now().strftime("%Y.%m.%d %H:%M:%S"),
+                    progress, total_images,
+                    (float(progress) / float(total_images) * 100),
+                    image_file))
 
     # save results
     current_time = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
